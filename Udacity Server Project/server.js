@@ -59,8 +59,8 @@ function sendData (request, response) {
         app.post('/addData', requestData);
             function requestData (request, res) {
                     newEntry = {
-                    temperature: request.body.temperature,
-                    date: request.body.date,
+                    temp: request.body.temp,
+                    date: request.body.newDate,
                     feelings: request.body.feelings
                     }
                 console.log("elephants")

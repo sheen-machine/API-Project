@@ -30,18 +30,23 @@ function doThisThing(x) {
         }
     }
     // then add the data receieved from the API to POST request
-    const feelings = document.getElementById('feelings').value;  
+     
+    const feelings = document.getElementById('feelings').value;
     getDataFromAPI(baseURL, zip, apiKey, "us")
         .then(function(data){
         console.log(data)
-        postData('/addData', {temperature: data.temperature, date: data.date, feelings:feelings});
-
+        postData('/addData', {temp: data.main.temp, date: data.newDate, feelings:feelings}
+        );
+        const d = newDate();
+        const newDate = d.getMonth() + '.' + d.getDate() + '.' + d.getFullYear();
+        
     })
 
+   
 .then(updateUI()
+
 )
 }
-
 //Function to GET Project data
 const updateUI = async () => {
     
@@ -49,8 +54,8 @@ const updateUI = async () => {
     try {
         const allData = await request.json()
         console.log(allData)
-    document.getElementById('date').innerHTML = allData[0].date;
-    document.getElementById('temperature').innerHTML = allData[0].temperature;
+    document.getElementById('date').innerHTML = allData[0].newDate;
+    document.getElementById('temp').innerHTML = allData[0].main.temp;
     document.getElementById('content').innerHTML = allData[0].feelings;
     
     } catch(error){
